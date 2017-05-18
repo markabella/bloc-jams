@@ -99,6 +99,9 @@
     display: table;
   }
 
+  .container.narrow {
+      max-width: 56rem;
+  }
   .clearfix::after {
     clear: both;
   }
