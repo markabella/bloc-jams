@@ -87,12 +87,12 @@ window.onload = function() {
 };
 
 
-document.getElementById("nextBtn").addEventListener("click", function(){
+document.getElementsByClassName('album-cover-art')[0].addEventListener("click", function(){
   if (currentAlbum==albumPicasso) {currentAlbum = albumMarconi;
     setCurrentAlbum(currentAlbum);}
     else if (currentAlbum==albumMarconi) {currentAlbum = albumFight;
       setCurrentAlbum(currentAlbum);}
       else if (currentAlbum==albumFight) {currentAlbum = albumPicasso;
         setCurrentAlbum(currentAlbum);}
-        //document.getElementById("demo").innerHTML = "Hello World";
+      
       });
