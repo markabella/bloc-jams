@@ -5,60 +5,58 @@ var createSongRow = function(songNumber, songName, songLength) {
   + '  <td class="song-item-title">' + songName + '</td>'
   + '  <td class="song-item-duration">' + songLength + '</td>'
   + '</tr>';
-var $row = $(template);
 
-var setSong =  function(songNumber) {
-  currentlyPlayingSongNumber = songNumber;
-  if (songNumber !== null) {currentSongFromAlbum = songNumber;
-  } else if (songNumber === null) {currentAlbum.songs[songNumber - 1];
-    currentSongFromAlbum = songNumber;
-  }
-};
+  var $row = $(template);
 
-var clickHandler = function() {
-  var songNumber = parseInt($(this).attr('data-song-number'));
+  var setSong =  function(songNumber) {
+    currentlyPlayingSongNumber = parseInt(songNumber);
+     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+  };
 
-  if (currentlyPlayingSongNumber !== null) {
-    // Revert to song number for currently playing song because user started playing new song.
-    var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
-    currentlyPlayingCell.html(currentlyPlayingSongNumber);
-  }
-  if (currentlyPlayingSongNumber !== songNumber) {
-    // Switch from Play -> Pause button to indicate new song is playing.
-    $(this).html(pauseButtonTemplate);
-    setSong(songNumber);
-    updatePlayerBarSong();
-  } else if (currentlyPlayingSongNumber === songNumber) {
-    // Switch from Pause -> Play button to pause currently playing song.
-    $(this).html(playButtonTemplate);
-    $('.main-controls .play-pause').html(playerBarPlayButton);
-    setSong(null);
-  }
-};
+  var clickHandler = function() {
+    var songNumber = parseInt($(this).attr('data-song-number'));
+
+    if (currentlyPlayingSongNumber !== null) {
+      // Revert to song number for currently playing song because user started playing new song.
+      var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+      currentlyPlayingCell.html(currentlyPlayingSongNumber);
+    }
+    if (currentlyPlayingSongNumber !== songNumber) {
+      // Switch from Play -> Pause button to indicate new song is playing.
+      $(this).html(pauseButtonTemplate);
+      setSong(songNumber);
+      updatePlayerBarSong();
+    } else if (currentlyPlayingSongNumber === songNumber) {
+      // Switch from Pause -> Play button to pause currently playing song.
+      $(this).html(playButtonTemplate);
+      $('.main-controls .play-pause').html(playerBarPlayButton);
+      setSong(null);
+    }
+  };
 
 
-var onHover = function(event) {
-  var songNumberCell = $(this).find('.song-item-number');
-  var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+  var onHover = function(event) {
+    var songNumberCell = $(this).find('.song-item-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
-  if (songNumber !== currentlyPlayingSongNumber) {
-    songNumberCell.html(playButtonTemplate);
-  }
-};
+    if (songNumber !== currentlyPlayingSongNumber) {
+      songNumberCell.html(playButtonTemplate);
+    }
+  };
 
-var offHover = function(event) {
-  var songNumberCell = $(this).find('.song-item-number');
-  var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+  var offHover = function(event) {
+    var songNumberCell = $(this).find('.song-item-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
-  if (songNumber !== currentlyPlayingSongNumber) {
-    songNumberCell.html(songNumber);
-  }
-  console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
-};
+    if (songNumber !== currentlyPlayingSongNumber) {
+      songNumberCell.html(songNumber);
+    }
+    console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
+  };
 
-$row.find('.song-item-number').click(clickHandler);
-$row.hover(onHover, offHover);
-return $row;
+  $row.find('.song-item-number').click(clickHandler);
+  $row.hover(onHover, offHover);
+  return $row;
 };
 
 
