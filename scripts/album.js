@@ -5,21 +5,20 @@ var setSong =  function(songNumber) {
 
   currentlyPlayingSongNumber = parseInt(songNumber);
   currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-  // #1
+
   currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
-    // #2
     formats: [ 'mp3' ],
     preload: true
   });
-   setVolume(currentVolume);
+  setVolume(currentVolume);
 };
 
 var setVolume = function(volume) {
-     if (currentSoundFile) {
-         currentSoundFile.setVolume(volume);
-     }
- };
- 
+  if (currentSoundFile) {
+    currentSoundFile.setVolume(volume);
+  }
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
   '<tr class="album-view-song-item">'
